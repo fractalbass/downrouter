@@ -1,0 +1,148 @@
+<html>
+<script type="text/javascript">
+    var BrowserDetect = {
+        init: function () {
+            this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
+            this.version = this.searchVersion(navigator.userAgent)
+                    || this.searchVersion(navigator.appVersion)
+                    || "an unknown version";
+            this.OS = this.searchString(this.dataOS) || "an unknown OS";
+        },
+        searchString: function (data) {
+            for (var i=0;i<data.length;i++) {
+                var dataString = data[i].string;
+                var dataProp = data[i].prop;
+                this.versionSearchString = data[i].versionSearch || data[i].identity;
+                if (dataString) {
+                    if (dataString.indexOf(data[i].subString) != -1)
+                        return data[i].identity;
+                }
+                else if (dataProp)
+                    return data[i].identity;
+            }
+        },
+        searchVersion: function (dataString) {
+            var index = dataString.indexOf(this.versionSearchString);
+            if (index == -1) return;
+            return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
+        },
+        dataBrowser: [
+            {
+                string: navigator.userAgent,
+                subString: "Chrome",
+                identity: "Chrome"
+            },
+            {       string: navigator.userAgent,
+                subString: "OmniWeb",
+                versionSearch: "OmniWeb/",
+                identity: "OmniWeb"
+            },
+            {
+                string: navigator.vendor,
+                subString: "Apple",
+                identity: "Safari",
+                versionSearch: "Version"
+            },
+            {
+                prop: window.opera,
+                identity: "Opera"
+            },
+            {
+                string: navigator.vendor,
+                subString: "iCab",
+                identity: "iCab"
+            },
+            {
+                string: navigator.vendor,
+                subString: "KDE",
+                identity: "Konqueror"
+            },
+            {
+                string: navigator.userAgent,
+                subString: "Firefox",
+                identity: "Firefox"
+            },
+            {
+                string: navigator.vendor,
+                subString: "Camino",
+                identity: "Camino"
+            },
+            {               // for newer Netscapes (6+)
+                string: navigator.userAgent,
+                subString: "Netscape",
+                identity: "Netscape"
+            },
+            {
+                string: navigator.userAgent,
+                subString: "MSIE",
+                identity: "Explorer",
+                versionSearch: "MSIE"
+            },
+            {
+                string: navigator.userAgent,
+                subString: "Gecko",
+                identity: "Mozilla",
+                versionSearch: "rv"
+            },
+            {               // for older Netscapes (4-)
+                string: navigator.userAgent,
+                subString: "Mozilla",
+                identity: "Netscape",
+                versionSearch: "Mozilla"
+            }
+        ],
+        dataOS : [
+            {
+                string: navigator.platform,
+                subString: "Win",
+                identity: "Windows"
+            },
+            {
+                string: navigator.platform,
+                subString: "Mac",
+                identity: "Mac"
+            },
+            {
+                string: navigator.userAgent,
+                subString: "iPhone",
+                identity: "iPhone/iPod"
+            },
+            {
+                string: navigator.platform,
+                subString: "Linux",
+                identity: "Linux"
+            }
+        ]
+
+    };
+    BrowserDetect.init();
+</script>
+<head>
+    <title>DownRouter</title>
+</head>
+<body>
+<h1>DownRouter</h1>
+DownRouter redirects web requests based on a combination of parameters on the incoming
+web request, and the user agent header of the browser making the request.  For more info on user agent http headers
+please look <a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields">here.</a>
+<br>
+To use this page, you must create an http GET request that is formatted similarly to the following example:
+  <pre>
+  http://downrouter.appspot.com/?IPAD=http://www.apple.com/ipad&IPOD=http://www.apple.com/ipod&IPHONE=http://www.apple.com/iphone&ANDROID=http://market.android.com&DEFAULT=http://www.google.com
+  </pre>
+In the above example URL, this application will redirect to www.apple.com/ipad if the incoming user agent header contains
+IPAD (case insensitive).  It will redirect to http://market.android.com if the user agent contains ANDROID (case insensitive) etc.
+<br><br>
+The optional DEFAULT parameter can be used to specify a URL to redirect to if no match is found.  If the DEFAULT parameter is omitted, and no match is found, this page is displayed.<br>
+<br><br>
+To help you develop your URLs, your user agent header value is displayed below.
+<br>
+<br>
+<hr width="75%">
+<br>
+<script type="text/javascript">
+    document.write("Your user agent header is:<br>" + navigator.userAgent + "<br><br>");
+    document.write('<p class="accent">It appears that you\'re using ' + BrowserDetect.browser + ' ' + BrowserDetect.version + ' on ' + BrowserDetect.OS + '</p>');
+</script>
+</body>
+</html>

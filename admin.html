@@ -1,0 +1,65 @@
+<html>
+<head>
+    <title>Downrouter Admin Page.</title>
+</head>
+<body>
+{% if message %}
+<hr>
+{{ message }}<br>
+<hr>
+{% endif %}
+
+<h2>Welcome to the admin page.</h2>
+Please use this form to create a new API KEY:<br>
+
+<form action="/admin/main" method="post">
+    <table>
+        <tr>
+            <td>Account Name</td>
+            <td><input type="text" name="account_name"></td>
+        </tr>
+        <tr>
+            <td>Expires</td>
+            <td><input type="date" name="expires"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" name="email"></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><input type="text" name="description"></td>
+        </tr>
+        <tr>
+            <td>Account Number</td>
+            <td><input type="text" name="account_number"></td>
+        </tr>
+    </table>
+    <input type="submit" name="Save">
+</form>
+<hr>
+Existing API Keys:
+<table border>
+    <tr>
+        <th>Account Name</th>
+        <th>API Key</th>
+        <th>Expires</th>
+        <th>Email</th>
+        <th>Description</th>
+        <th>Account Number</th>
+        <th>Created</th>
+    </tr>
+    {% for api_key in api_keys %}
+    <tr>
+        <td>{{ api_key.account_name }}</td>
+        <td>{{ api_key.api_key }}</td>
+        <td>{{ api_key.expires }}</td>
+        <td>{{ api_key.email }}</td>
+        <td>{{ api_key.description }}</td>
+        <td>{{ api_key.account_number }}</td>
+        <td>{{ api_key.created }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
