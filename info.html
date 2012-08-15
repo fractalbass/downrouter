@@ -128,10 +128,11 @@ please look <a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields">he
 <br>
 To use this page, you must create an http GET request that is formatted similarly to the following example:
   <pre>
-  http://downrouter.appspot.com/?IPAD=http://www.apple.com/ipad&IPOD=http://www.apple.com/ipod&IPHONE=http://www.apple.com/iphone&ANDROID=http://market.android.com&DEFAULT=http://www.google.com
+  http://downrouter.appspot.com/?IPAD=http://www.apple.com/ipad&IPOD=http://www.apple.com/ipod&IPHONE=http://www.apple.com/iphone&ANDROID=http://market.android.com&DEFAULT=http://www.google.com&api_key=[your_key_here]
   </pre>
 In the above example URL, this application will redirect to www.apple.com/ipad if the incoming user agent header contains
-IPAD (case insensitive).  It will redirect to http://market.android.com if the user agent contains ANDROID (case insensitive) etc.
+IPAD (case insensitive).  It will redirect to http://market.android.com if the user agent contains ANDROID (case insensitive) etc.<br><br>
+Also please note that you need an API key to use this application.  To get an API key, please contact mporter@paintedharmony.com<br><br>
 <br><br>
 The optional DEFAULT parameter can be used to specify a URL to redirect to if no match is found.  If the DEFAULT parameter is omitted, and no match is found, this page is displayed.<br>
 <br><br>

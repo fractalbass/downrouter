@@ -20,7 +20,7 @@ class MainHandler(BaseHandler):
         api_key_str = self.request.get('api_key')
         api = API_KEY.all().filter('api_key =', api_key_str)
         if api.count()==0:
-            self.render_template("invalid.html", {})
+            self.render_template("info.html", {})
         elif api[0].expires < datetime.now():
             self.render_template("expired.html", {})
         else:
