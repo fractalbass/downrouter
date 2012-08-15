@@ -39,7 +39,7 @@ Please use this form to create a new API KEY:<br>
 </form>
 <hr>
 Existing API Keys:
-<table border>
+<table border cellpadding="10px;">
     <tr>
         <th>Account Name</th>
         <th>API Key</th>
@@ -48,6 +48,7 @@ Existing API Keys:
         <th>Description</th>
         <th>Account Number</th>
         <th>Created</th>
+        <th>Request Counter</th>
     </tr>
     {% for api_key in api_keys %}
     <tr>
@@ -58,6 +59,7 @@ Existing API Keys:
         <td>{{ api_key.description }}</td>
         <td>{{ api_key.account_number }}</td>
         <td>{{ api_key.created }}</td>
+        <td>{{ api_key.request_count }}</td>
     </tr>
     {% endfor %}
 </table>

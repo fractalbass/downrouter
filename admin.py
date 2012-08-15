@@ -23,7 +23,6 @@ class AdminHandler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'admin.html')
         self.response.out.write(template.render(path, {'api_keys':api_keys, 'user':user, 'logout_url':logout_url}))
 
-    @login_required
     def post(self):
         user = users.get_current_user()
         logout_url = users.create_logout_url("/")

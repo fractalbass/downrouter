@@ -7,6 +7,7 @@ class MobileRedirect(db.Model):
     parameter_string = db.StringProperty()
     resulting_url = db.StringProperty(required=True)
     created = db.DateTimeProperty(auto_now_add=True)
+    api_key = db.StringProperty(required=True)
 
 class API_KEY(db.Model):
     api_key = db.StringProperty(required=True)
@@ -15,4 +16,5 @@ class API_KEY(db.Model):
     email = db.StringProperty(required=True)
     description = db.StringProperty(required=True)
     account_number = db.StringProperty(required=True)
+    request_count = db.IntegerProperty(default=0, required=True)
     created = db.DateTimeProperty(auto_now=True)

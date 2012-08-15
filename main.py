@@ -24,6 +24,10 @@ class MainHandler(BaseHandler):
         elif api[0].expires < datetime.now():
             self.render_template("expired.html", {})
         else:
+            api=api[0]
+            request_count = api.request_count
+            api.request_count = request_count + 1
+            api.save()
             user_agent = self.request.get('UA', None)
             if not user_agent:
                 user_agent = str(self.request.headers['User-Agent'])
@@ -36,7 +40,7 @@ class MainHandler(BaseHandler):
 
                     m = MobileRedirect(parameter_string=self.request.query_string,
                         user_agent = user_agent,
-                        resulting_url = redirect)
+                        resulting_url = redirect, api_key=api_key_str)
                     m.put()
 
             if redirect=="None":
